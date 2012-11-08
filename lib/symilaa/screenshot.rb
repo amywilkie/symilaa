@@ -1,4 +1,5 @@
 require 'RMagick'
+require 'fileutils'
 
 module Symilaa
   class Screenshot
@@ -11,6 +12,10 @@ module Symilaa
     end
 
     def == other
+      FileUtils.cmp path, other.path
+    end
+
+    def similar_to? other
       this_one = Magick::Image.read(@path).first
       that_one = Magick::Image.read(other.path).first
 

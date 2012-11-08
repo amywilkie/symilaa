@@ -19,7 +19,7 @@ module Symilaa
       one = Screenshot.new GRYLLS
       two = Screenshot.new GRYLLS_SLIGHT_DIFF
 
-      assert one == two
+      refute one == two
     end
 
     def test_equality_when_identical
@@ -27,6 +27,27 @@ module Symilaa
       two = Screenshot.new GRYLLS
 
       assert one == two
+    end
+
+    def test_similar_when_identical
+      one = Screenshot.new GRYLLS
+      two = Screenshot.new GRYLLS
+
+      assert one.similar_to? two
+    end
+    
+    def test_similar_when_similar
+      one = Screenshot.new GRYLLS
+      two = Screenshot.new GRYLLS_SLIGHT_DIFF
+
+      assert one.similar_to? two
+    end
+   
+    def test_similar_when_different
+      one = Screenshot.new GRYLLS
+      two = Screenshot.new GRYLLS_DIFF
+
+      refute one.similar_to? two
     end
   end
 end
