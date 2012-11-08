@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Symilaa::VERSION
   s.authors     = ["jamienglish,drpep"]
   s.email       = ["skyhelpcentre@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/bskyb-commerce-helpcentre/symilaa"
   s.summary     = %q{Compares images for similarity.  Amazebears.}
   s.description = %q{Using the wonders of RMagick, this wonderful gem will produce a boolean result based on the computed similarity
     of the two images passed.}
