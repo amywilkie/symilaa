@@ -7,6 +7,7 @@ module Symilaa
     GRYLLS             = File.expand_path '../fixtures/bear_grylls.png', File.dirname(__FILE__)
     GRYLLS_SLIGHT_DIFF = File.expand_path '../fixtures/bear_grylls_slightly_different.png', File.dirname(__FILE__)
     GRYLLS_DIFF        = File.expand_path '../fixtures/bear_grylls_different.png', File.dirname(__FILE__)
+    QUEENY_POPS        = File.expand_path '../fixtures/farewells.jpg', File.dirname(__FILE__)
 
     def test_equality_when_images_altered
       one = Screenshot.new GRYLLS
@@ -48,6 +49,14 @@ module Symilaa
       two = Screenshot.new GRYLLS_DIFF
 
       refute one.similar_to? two
+    end
+   
+    def test_different_sized_images_are_different
+      one = Screenshot.new GRYLLS
+      two = Screenshot.new QUEENY_POPS
+
+      refute one.similar_to? two
+      refute one == two
     end
   end
 end
