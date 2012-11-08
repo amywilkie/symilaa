@@ -22,6 +22,6 @@ module Symilaa
       similiarity_factor = this_one.compare_channel(that_one, Magick::MeanAbsoluteErrorMetric)[1]
 
       similiarity_factor <= SIMILARITY_THRESHOLD
-    end
+    rescue Magick::ImageMagickError; end
   end
 end
