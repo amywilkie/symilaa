@@ -3,7 +3,7 @@ require 'fileutils'
 
 module Symilaa
   class Screenshot
-    SIMILARITY_THRESHOLD = 0.000135127
+    SIMILARITY_THRESHOLD = 41.4
 
     attr_reader :path
 
@@ -19,9 +19,9 @@ module Symilaa
       this_one = Magick::Image.read(@path).first
       that_one = Magick::Image.read(other.path).first
 
-      similiarity_factor = this_one.compare_channel(that_one, Magick::MeanAbsoluteErrorMetric)[1]
+      similiarity_factor = this_one.compare_channel(that_one, Magick::PeakSignalToNoiseRatioMetric)[1]
 
-      similiarity_factor <= SIMILARITY_THRESHOLD
+      similiarity_factor >= SIMILARITY_THRESHOLD
     rescue Magick::ImageMagickError; end
   end
 end
