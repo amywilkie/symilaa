@@ -21,5 +21,9 @@ Gem::Specification.new do |s|
 
   # specify any dependencies here; for example:
   s.add_development_dependency "minitest"
+  s.add_development_dependency "guard-minitest"
+
+  s.add_development_dependency 'rb-inotify' if RUBY_PLATFORM =~ /linux/
+
   s.add_runtime_dependency "rmagick"
 end

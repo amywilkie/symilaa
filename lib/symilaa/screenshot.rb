@@ -3,7 +3,7 @@ require 'fileutils'
 
 module Symilaa
   class Screenshot
-    SIMILARITY_THRESHOLD = 0.0002
+    SIMILARITY_THRESHOLD = 0.000135127
 
     attr_reader :path
 
