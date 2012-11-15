@@ -93,6 +93,10 @@ module Symilaa
       File.join base_dir, 'screenshots_generated_this_run'
     end
 
+    def differences_in_screenshots_this_run_dir
+      File.join base_dir, 'differences_in_screenshots_this_run'
+    end
+
     def scenario_name
       @gherkin_statement.parameterize.underscore if @gherkin_statement
     end
