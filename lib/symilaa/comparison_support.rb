@@ -77,12 +77,12 @@ module Symilaa
       %w[chrome ie7 ie8 ie9].include? ENV['REQUIRED_BROWSER']
     end
 
-    def chrome_or_firefox_3_5?
-      browser_name == 'chrome' or (browser_name == 'firefox' and browser_version == '3.5')
+    def chrome_or_firefox?
+      %w[chrome firefox].include? browser_name
     end
 
     def version_if_required
-      "_#{browser_info.version.gsub('.', '-')}" if chrome_or_firefox_3_5? 
+      "_#{browser_info.version.gsub('.', '-')}" unless chrome_or_firefox? 
     end
 
     def reference_screenshots
