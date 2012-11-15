@@ -27,7 +27,7 @@ module Symilaa
     end
 
     def get_unique_file_name path, extension, inc=0
-      inc = inc.to_int+1
+      inc += 1
 
       new_path = "#{path}#{inc}#{extension}"
 
@@ -77,7 +77,7 @@ module Symilaa
       %w[chrome ie7 ie8 ie9].include? ENV['REQUIRED_BROWSER']
     end
 
-    def chrome_or_firefox_3_5
+    def chrome_or_firefox_3_5?
       browser_name == 'chrome' or (browser_name == 'firefox' and browser_version == '3.5')
     end
 
@@ -97,13 +97,13 @@ module Symilaa
       @gherkin_statement.parameterize.underscore if @gherkin_statement
     end
 
-    def create_screenshot_directory sub_directory, scenario_name
+    def create_screenshot_directory sub_directory
       FileUtils.mkdir_p(File.join screenshots_generated_this_run_dir, sub_directory, scenario_name)
     end
 
     def create_screenshot_filename sub_directory
       file_name = "#{browser_info.browser_name.capitalize.parameterize}#{version_if_required}_#{browser_info.platform.capitalize}_#{title}"
-      get_unique_file_name "#{screenshots_generated_this_run_dir}/#{sub_directory}#{file_name}", '.png'
+      get_unique_file_name "#{screenshots_generated_this_run_dir}/#{sub_directory}#{scenario_name}/#{file_name}", '.png'
     end
 
     def save_screenshot screenshot_path
@@ -111,13 +111,13 @@ module Symilaa
     end
 
     def check_screen_against_reference_shot target_sub_directory
-      create_directories %w[reference_screenshots screenshots_generated_this_run differences_in_screenshots_this_run]
+      create_directories %w[screenshots_generated_this_run differences_in_screenshots_this_run]
       create_screenshot_directory target_sub_directory
 
       generated_screenshot_path = create_screenshot_filename target_sub_directory
       screenshot_name           = File.basename generated_screenshot_path
-      reference_path            = File.join reference_screenshots, target_sub_directory, screenshot_name
-      difference_file           = File.join path, "#{screenshot_name}_difference.gif"
+      reference_path            = File.join reference_screenshots, target_sub_directory, scenario_name, screenshot_name
+      difference_file           = "#{generated_screenshot_path}_difference.gif"
 
       save_screenshot generated_screenshot_path
 
