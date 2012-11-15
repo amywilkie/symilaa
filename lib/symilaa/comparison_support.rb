@@ -130,7 +130,7 @@ module Symilaa
       save_screenshot generated_screenshot_path
 
       unless same? reference_path, generated_screenshot_path
-        File.mkdir_p File.dirname(difference_file)
+        FileUtils.mkdir_p File.dirname(difference_file)
 
         produce_gif_showing_the_difference_between reference_path, generated_screenshot_path, difference_file
 
