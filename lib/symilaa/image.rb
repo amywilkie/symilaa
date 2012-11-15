@@ -2,7 +2,7 @@ require 'RMagick'
 require 'fileutils'
 
 module Symilaa
-  class Screenshot
+  class Image
     SIMILARITY_THRESHOLD = 41.4
 
     attr_reader :path

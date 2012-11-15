@@ -1,2 +1,2 @@
 require "symilaa/version"
-require 'symilaa/screenshot'
+require 'symilaa/image'
