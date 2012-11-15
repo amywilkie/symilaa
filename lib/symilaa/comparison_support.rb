@@ -1,7 +1,7 @@
 module Symilaa
   module ComparisonSupport
     def add_text_to_image text, image
-      txt = Draw.new
+      txt = Magick::Draw.new
       image.annotate(txt, 0, 0, 0, 50, text) {
         txt.gravity = Magick::SouthGravity
         txt.pointsize = 25
