@@ -40,9 +40,7 @@ module Symilaa
 
     def create_directories directories
       directories.each do |dir|
-        path = File.join base_dir, dir
-        FileUtils.rm_rf(path) if File.exists? path
-        FileUtils.mkdir_p path
+        FileUtils.mkdir_p File.join(base_dir, dir)
       end
     end
 
