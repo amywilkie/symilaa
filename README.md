@@ -9,9 +9,9 @@ With Symilaa, this is particularly easy.
 ----------------
 
 ```ruby
-one = Symilaa::Screenshot.new 'image.png'
-two = Symilaa::Screenshot.new 'slightly_different_image.png'
-three = Symilaa::Screenshot.new 'very_different_image.png'
+one = Symilaa::Image.new 'image.png'
+two = Symilaa::Image.new 'slightly_different_image.png'
+three = Symilaa::Image.new 'very_different_image.png'
 
 one == one
 #=> true
