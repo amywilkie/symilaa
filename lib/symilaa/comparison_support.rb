@@ -75,12 +75,12 @@ module Symilaa
       %w[chrome ie7 ie8 ie9].include? ENV['REQUIRED_BROWSER']
     end
 
-    def chrome_or_firefox?
-      %w[chrome firefox].include? browser_name
+    def auto_updating_browser?
+      %w[chrome firefox safari].include? browser_name
     end
 
     def version_if_required
-      "_#{browser_info.version.gsub('.', '-')}" unless chrome_or_firefox? 
+      "_#{browser_info.version.gsub('.', '-')}" unless auto_updating_browser? 
     end
 
     def reference_screenshots
