@@ -1,4 +1,4 @@
-require 'activesupport'
+require 'active_support/core_ext'
 require 'RMagick'
 
 module Symilaa
