@@ -27,5 +27,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rb-inotify' if RUBY_PLATFORM =~ /linux/
 
   s.add_runtime_dependency "rmagick"
-  s.add_runtime_dependency "active_support"
+  s.add_runtime_dependency "activesupport"
 end
