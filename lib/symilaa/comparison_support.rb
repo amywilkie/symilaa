@@ -1,3 +1,6 @@
+require 'activesupport'
+require 'RMagick'
+
 module Symilaa
   module ComparisonSupport
     def base_dir= dir
