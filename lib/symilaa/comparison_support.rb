@@ -72,15 +72,7 @@ module Symilaa
       reference_screenshot = Image.new reference_file
       generated_screenshot = Image.new test_file
 
-      if dodgy_browser?
-        reference_screenshot.similar_to? generated_screenshot
-      else
-        reference_screenshot == generated_screenshot
-      end
-    end
-
-    def dodgy_browser?
-      %w[chrome ie7 ie8 ie9].include? ENV['REQUIRED_BROWSER']
+      reference_screenshot.similar_to? generated_screenshot
     end
 
     def auto_updating_browser?
