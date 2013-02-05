@@ -134,10 +134,13 @@ module Symilaa
         break if same? reference_path, generated_screenshot_path
         sleep 1
       end
-      FileUtils.mkdir_p File.dirname(difference_file)
-      produce_gif_showing_the_difference_between reference_path, generated_screenshot_path, difference_file
 
-      fail "Some of the screenshots did not match"
+      unless same? reference_path, generated_screenshot_path
+        FileUtils.mkdir_p File.dirname(difference_file)
+        produce_gif_showing_the_difference_between reference_path, generated_screenshot_path, difference_file
+
+        fail "Some of the screenshots did not match"
+      end
     end
   end
 end
