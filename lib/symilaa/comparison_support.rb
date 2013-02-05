@@ -114,10 +114,10 @@ module Symilaa
     def create_screenshot_filename sub_directory, unique_filename_required
       file_name = "#{browser_info.browser_name.capitalize.parameterize}#{version_if_required}_#{browser_info.platform.capitalize}_#{title}"
       if unique_filename_required
-      get_unique_file_name "#{screenshots_generated_this_run_dir}/#{sub_directory}#{scenario_name}/#{file_name}", '.png'
+        get_unique_file_name "#{screenshots_generated_this_run_dir}/#{sub_directory}#{scenario_name}/#{file_name}", '.png'
       else
         get_file_name "#{screenshots_generated_this_run_dir}/#{sub_directory}#{scenario_name}/#{file_name}", '.png'
-    end
+      end
     end
 
     def save_screenshot screenshot_path
@@ -128,7 +128,7 @@ module Symilaa
       "#{generated_screenshot_path}_difference.gif".gsub('screenshots_generated_this_run', 'differences_in_screenshots_this_run')
     end
 
-    def check_screen_against_reference_shot target_sub_directory, unique_filename_required = true
+    def check_screen_against_reference_shot target_sub_directory, unique_filename_required = true, retries = 1
       create_directories %w[screenshots_generated_this_run differences_in_screenshots_this_run]
       create_screenshot_directory target_sub_directory
 
@@ -137,15 +137,15 @@ module Symilaa
       reference_path            = File.join reference_screenshots, target_sub_directory, scenario_name, screenshot_name
       difference_file           = difference_file_path generated_screenshot_path
 
-      save_screenshot generated_screenshot_path
-
-      unless same? reference_path, generated_screenshot_path
-        FileUtils.mkdir_p File.dirname(difference_file)
-
-        produce_gif_showing_the_difference_between reference_path, generated_screenshot_path, difference_file
-
-        fail "Some of the screenshots did not match"
+      retries.times do 
+        save_screenshot generated_screenshot_path
+        break if same? reference_path, generated_screenshot_path
+        sleep 1
       end
+      FileUtils.mkdir_p File.dirname(difference_file)
+      produce_gif_showing_the_difference_between reference_path, generated_screenshot_path, difference_file
+
+      fail "Some of the screenshots did not match"
     end
   end
 end
