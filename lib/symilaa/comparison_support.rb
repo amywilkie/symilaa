@@ -65,7 +65,10 @@ module Symilaa
     end
 
     def title
-      find('title').text.parameterize.underscore
+      Capybara.ignore_hidden_elements = false
+      val = find('title').native.text.parameterize.underscore
+      Capybara.ignore_hidden_elements = true
+      val
     end
 
     def same? reference_file, test_file
