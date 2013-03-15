@@ -65,10 +65,12 @@ module Symilaa
     end
 
     def title
+      find('title').text.parameterize.underscore
+    rescue Capybara::ElementNotFound => e
       Capybara.ignore_hidden_elements = false
-      val = find('title').native.text.parameterize.underscore
+      value = find('title').native.text.parameterize.underscore
       Capybara.ignore_hidden_elements = true
-      val
+      value
     end
 
     def same? reference_file, test_file
