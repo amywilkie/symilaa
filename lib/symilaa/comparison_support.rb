@@ -65,7 +65,11 @@ module Symilaa
     end
 
     def title
-      find('title').text.parameterize.underscore
+      if page.respond_to?(:title)
+        page.title.parameterize.underscore
+      else
+        find('title').text.parameterize.underscore
+      end
     rescue Capybara::ElementNotFound => e
       Capybara.ignore_hidden_elements = false
       value = find('title').native.text.parameterize.underscore
