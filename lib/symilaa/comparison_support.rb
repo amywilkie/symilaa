@@ -66,7 +66,11 @@ module Symilaa
 
     def title
       if page.respond_to?(:title)
-        page.title.parameterize.underscore
+        for i in 0..5
+          value = page.title.parameterize.underscore
+          return value if value!=""
+        end
+        value
       else
         find('title').text.parameterize.underscore
       end
